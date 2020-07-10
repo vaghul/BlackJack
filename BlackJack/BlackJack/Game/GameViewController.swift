@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  GameViewController.swift
 //  BlackJack
 //
 //  Created by Vaghula Krishnan on 2020-07-09.
@@ -8,18 +8,21 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class GameViewController: UIViewController {
 
-    var viewComponent: HomeView! { return self.view as? HomeView }
+    var viewComponent: GameView! { return self.view as? GameView }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.isHidden = true
         // Do any additional setup after loading the view.
-        self.view = HomeView(frame: self.view.frame)
+        
+        self.view = GameView(frame: self.view.frame)
+        
         viewComponent.delegate = self
+
     }
+    
 
     /*
     // MARK: - Navigation
@@ -33,15 +36,8 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController:HomeViewDelegate {
-    func onClickGameMenu(index: Int) {
-        if index == 0 {
-            
-        }else if index == 1{
-            let gameVc = GameViewController()
-            self.navigationController?.pushViewController(gameVc, animated: false)
-        }else if index == 2{
-            
-        }
+extension GameViewController : GameViewDelegate {
+    func onClickLeave() {
+        self.navigationController?.popViewController(animated: false)
     }
 }

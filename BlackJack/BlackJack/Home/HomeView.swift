@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol HomeViewDelegate:class {
+    func onClickGameMenu(index:Int)
+}
+
 class HomeView: UIView {
     
+    weak var delegate:HomeViewDelegate?
     
     let imageViewBackground:UIImageView = {
         let view = UIImageView(image: UIImage(named: "Background"))
@@ -37,18 +42,21 @@ class HomeView: UIView {
     
     let buttonResume:ButtonGame = {
         let view = ButtonGame()
+        view.tag = 0
         view.setTitle("Resume Game", for: .normal)
         return view
     }()
     
     let buttonNewGame:ButtonGame = {
         let view = ButtonGame()
+        view.tag = 1
         view.setTitle("New Game", for: .normal)
         return view
     }()
     
     let buttonSetting:ButtonGame = {
         let view = ButtonGame()
+        view.tag = 2
         view.setTitle("Setting", for: .normal)
         return view
     }()
@@ -58,7 +66,14 @@ class HomeView: UIView {
           backgroundColor = .white
           layoutSetup()
           
+        buttonResume.addTarget(self, action: #selector(onClickMenu(_:)), for: .touchUpInside)
+        buttonNewGame.addTarget(self, action: #selector(onClickMenu(_:)), for: .touchUpInside)
+        buttonSetting.addTarget(self, action: #selector(onClickMenu(_:)), for: .touchUpInside)
       }
+    
+    @objc func onClickMenu(_ sender:UIButton) {
+        delegate?.onClickGameMenu(index: sender.tag)
+    }
       
       required init?(coder: NSCoder) {
           fatalError("init(coder:) has not been implemented")
