@@ -11,7 +11,8 @@ import UIKit
 class GameViewController: UIViewController {
 
     var viewComponent: GameView! { return self.view as? GameView }
-
+    var deck:DeckOfCards?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +21,24 @@ class GameViewController: UIViewController {
         self.view = GameView(frame: self.view.frame)
         
         viewComponent.delegate = self
-
+        deck = DeckOfCards()
+        deck?.shuffle()
+        
+        let player1 = Dealer(name: "Dealer")
+        player1.addCard(card: deck?.dealOneCard(ishidden: true))
+        
+        let player2 = Player(name:"Player")
+        player2.addCard(card: deck?.dealOneCard())
+        
+        player1.addCard(card: deck?.dealOneCard())
+        player2.addCard(card: deck?.dealOneCard())
+        
+        print(player1.printHand())
+        print(player2.printHand())
+        print(deck?.deckOfCards.count)
+        
+        viewComponent.viewdelearDeck.setViewElements(playervalue: player1)
+        viewComponent.viewplayerDeck.setViewElements(playervalue: player2)
     }
     
 

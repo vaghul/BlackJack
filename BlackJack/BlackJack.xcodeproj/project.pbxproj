@@ -19,6 +19,11 @@
 		C1AE438924B8149400F5832B /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE438824B8149400F5832B /* GameModel.swift */; };
 		C1AE438B24B8149F00F5832B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE438A24B8149F00F5832B /* GameView.swift */; };
 		C1AE438D24B818C300F5832B /* viewDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE438C24B818C300F5832B /* viewDeck.swift */; };
+		C1AE439024B8FAAF00F5832B /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE438F24B8FAAF00F5832B /* Card.swift */; };
+		C1AE439224B8FB0700F5832B /* DeckOfCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439124B8FB0700F5832B /* DeckOfCards.swift */; };
+		C1AE439424B8FB9900F5832B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439324B8FB9900F5832B /* Player.swift */; };
+		C1AE439624B8FF7F00F5832B /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439524B8FF7F00F5832B /* CardCollectionViewCell.swift */; };
+		C1AE439824B90DDD00F5832B /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439724B90DDD00F5832B /* ViewActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		C1AE438824B8149400F5832B /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		C1AE438A24B8149F00F5832B /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		C1AE438C24B818C300F5832B /* viewDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewDeck.swift; sourceTree = "<group>"; };
+		C1AE438F24B8FAAF00F5832B /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		C1AE439124B8FB0700F5832B /* DeckOfCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckOfCards.swift; sourceTree = "<group>"; };
+		C1AE439324B8FB9900F5832B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		C1AE439524B8FF7F00F5832B /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		C1AE439724B90DDD00F5832B /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +78,7 @@
 		C1AE436224B7CB4400F5832B /* BlackJack */ = {
 			isa = PBXGroup;
 			children = (
+				C1AE438E24B8FA8E00F5832B /* DataModel */,
 				C1AE438224B811E600F5832B /* ViewComponents */,
 				C1AE437F24B80F2D00F5832B /* extension */,
 				C1AE437724B7D46200F5832B /* Home */,
@@ -103,6 +114,8 @@
 			children = (
 				C1AE438324B811FF00F5832B /* ButtonGame.swift */,
 				C1AE438C24B818C300F5832B /* viewDeck.swift */,
+				C1AE439524B8FF7F00F5832B /* CardCollectionViewCell.swift */,
+				C1AE439724B90DDD00F5832B /* ViewActions.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -115,6 +128,16 @@
 				C1AE438A24B8149F00F5832B /* GameView.swift */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		C1AE438E24B8FA8E00F5832B /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				C1AE438F24B8FAAF00F5832B /* Card.swift */,
+				C1AE439124B8FB0700F5832B /* DeckOfCards.swift */,
+				C1AE439324B8FB9900F5832B /* Player.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,16 +210,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1AE439224B8FB0700F5832B /* DeckOfCards.swift in Sources */,
 				C1AE438724B8148200F5832B /* GameViewController.swift in Sources */,
 				C1AE436424B7CB4400F5832B /* AppDelegate.swift in Sources */,
 				C1AE437E24B7D4FF00F5832B /* HomeView.swift in Sources */,
+				C1AE439624B8FF7F00F5832B /* CardCollectionViewCell.swift in Sources */,
 				C1AE437A24B7D4A500F5832B /* HomeViewController.swift in Sources */,
+				C1AE439424B8FB9900F5832B /* Player.swift in Sources */,
 				C1AE438B24B8149F00F5832B /* GameView.swift in Sources */,
 				C1AE438D24B818C300F5832B /* viewDeck.swift in Sources */,
 				C1AE437C24B7D4BF00F5832B /* HomeModel.swift in Sources */,
+				C1AE439824B90DDD00F5832B /* ViewActions.swift in Sources */,
 				C1AE438924B8149400F5832B /* GameModel.swift in Sources */,
 				C1AE438124B80F4200F5832B /* UIColor+.swift in Sources */,
 				C1AE438424B811FF00F5832B /* ButtonGame.swift in Sources */,
+				C1AE439024B8FAAF00F5832B /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ class ButtonGame: UIButton {
         viewSetup()
     }
     
-    func viewSetup() {
+    fileprivate func viewSetup() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .buttonRed
         self.layer.cornerRadius = 12

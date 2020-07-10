@@ -29,7 +29,21 @@ class GameView: UIView {
         return view
     }()
     
+    let viewdelearDeck:viewDeck = {
+       let view = viewDeck()
+        return view
+    }()
     
+    let viewGameActions:ViewActions = {
+        let view = ViewActions()
+        return view
+    }()
+    
+    let viewplayerDeck:viewDeck = {
+          let view = viewDeck()
+           return view
+       }()
+       
     override init(frame: CGRect) {
           super.init(frame: frame)
           backgroundColor = .white
@@ -58,6 +72,33 @@ class GameView: UIView {
         buttonLeave.widthAnchor.constraint(equalToConstant: 150).isActive = true
         buttonLeave.heightAnchor.constraint(equalToConstant: 40).isActive = true
         buttonLeave.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+
+        let gamePlayStack = UIStackView(arrangedSubviews: [viewdelearDeck,viewGameActions,viewplayerDeck])
+        gamePlayStack.translatesAutoresizingMaskIntoConstraints = false
+        gamePlayStack.alignment = .fill
+        gamePlayStack.axis = .vertical
+        gamePlayStack.distribution = .fillEqually
+        
+        
+        addSubview(gamePlayStack)
+        gamePlayStack.topAnchor.constraint(equalTo: buttonLeave.bottomAnchor,constant: 10).isActive = true
+        gamePlayStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20).isActive = true
+        gamePlayStack.bottomAnchor.constraint(equalTo:self.safeAreaLayoutGuide.bottomAnchor,constant: -50).isActive = true
+        gamePlayStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+
+       // addSubview(viewdelearDeck)
+//        viewdelearDeck.topAnchor.constraint(equalTo: buttonLeave.bottomAnchor,constant: 10).isActive = true
+//        viewdelearDeck.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20).isActive = true
+        viewdelearDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
+//        viewdelearDeck.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+
+        
+        
+//        addSubview(viewplayerDeck)
+//        viewplayerDeck.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor,constant: -10).isActive = true
+//        viewplayerDeck.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20).isActive = true
+        viewplayerDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
+//        viewplayerDeck.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
 
         
     }
