@@ -13,6 +13,8 @@
 		C1AE437A24B7D4A500F5832B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE437924B7D4A500F5832B /* HomeViewController.swift */; };
 		C1AE437C24B7D4BF00F5832B /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE437B24B7D4BF00F5832B /* HomeModel.swift */; };
 		C1AE437E24B7D4FF00F5832B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE437D24B7D4FF00F5832B /* HomeView.swift */; };
+		C1AE438124B80F4200F5832B /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE438024B80F4200F5832B /* UIColor+.swift */; };
+		C1AE438424B811FF00F5832B /* ButtonGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE438324B811FF00F5832B /* ButtonGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		C1AE437924B7D4A500F5832B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C1AE437B24B7D4BF00F5832B /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		C1AE437D24B7D4FF00F5832B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C1AE438024B80F4200F5832B /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		C1AE438324B811FF00F5832B /* ButtonGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		C1AE436224B7CB4400F5832B /* BlackJack */ = {
 			isa = PBXGroup;
 			children = (
+				C1AE438224B811E600F5832B /* ViewComponents */,
+				C1AE437F24B80F2D00F5832B /* extension */,
 				C1AE437724B7D46200F5832B /* Home */,
 				C1AE436324B7CB4400F5832B /* AppDelegate.swift */,
 				C1AE436C24B7CB4500F5832B /* Assets.xcassets */,
@@ -73,6 +79,22 @@
 				C1AE437D24B7D4FF00F5832B /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		C1AE437F24B80F2D00F5832B /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				C1AE438024B80F4200F5832B /* UIColor+.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		C1AE438224B811E600F5832B /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				C1AE438324B811FF00F5832B /* ButtonGame.swift */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +171,8 @@
 				C1AE437E24B7D4FF00F5832B /* HomeView.swift in Sources */,
 				C1AE437A24B7D4A500F5832B /* HomeViewController.swift in Sources */,
 				C1AE437C24B7D4BF00F5832B /* HomeModel.swift in Sources */,
+				C1AE438124B80F4200F5832B /* UIColor+.swift in Sources */,
+				C1AE438424B811FF00F5832B /* ButtonGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
