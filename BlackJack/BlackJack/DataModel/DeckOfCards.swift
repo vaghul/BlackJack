@@ -9,27 +9,40 @@
 import Foundation
 
 
+protocol DeckOfCardsDelegate:class {
+    func didShuffle()
+}
+
 /// Representing a deck of cards with methods to manipulate it.
 class DeckOfCards {
   
   /// Holds a deck of cards
-  var deckOfCards: [Card]
-  
+    var deckOfCards: [Card]
+  weak var delegate:DeckOfCardsDelegate?
+    
   /// Constructor method for creating a deck of cards
   init() {
     self.deckOfCards = [Card]()
-    
-    for rank in Rank.allValues {
-      for suit in Suit.allValues {
-        self.deckOfCards.append(Card(rank: rank, suit: suit))
-      }
-    }
+    createCards()
   }
+    
+    func createCards() {
+        for rank in Rank.allValues {
+          for suit in Suit.allValues {
+            self.deckOfCards.append(Card(rank: rank, suit: suit))
+          }
+        }
+    }
   
   /// Deals one card from the current deck. Pops the last card from the deck.
   ///
   /// - Returns: The last card of the deck
     func dealOneCard(ishidden:Bool = false) -> Card {
+        if deckOfCards.count < 16 {
+            createCards()
+            self.shuffle()
+            delegate?.didShuffle()
+        }
         var dealCard = deckOfCards.removeLast()
         dealCard.ishidden = ishidden
         return dealCard

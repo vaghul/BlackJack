@@ -23,9 +23,20 @@ class GameView: UIView {
         return view
     }()
     
+    let labelBetAmount: UILabel = {
+       let view = UILabel()
+       view.translatesAutoresizingMaskIntoConstraints = false
+        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+       view.textColor = .white
+        view.text = "BET: $500"
+       view.textAlignment = .left
+       return view
+    }()
+    
     let buttonLeave:ButtonGame = {
         let view = ButtonGame()
-        view.setTitle("Leave Room", for: .normal)
+        view.setTitle("Quit", for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return view
     }()
     
@@ -40,9 +51,19 @@ class GameView: UIView {
     }()
     
     let viewplayerDeck:viewDeck = {
-          let view = viewDeck()
-           return view
-       }()
+        let view = viewDeck()
+        return view
+    }()
+    
+    let labelBankAmount: UILabel = {
+       let view = UILabel()
+       view.translatesAutoresizingMaskIntoConstraints = false
+       view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+       view.textColor = .white
+       view.textAlignment = .left
+        view.text = "BANK: $500"
+       return view
+    }()
        
     override init(frame: CGRect) {
           super.init(frame: frame)
@@ -67,39 +88,40 @@ class GameView: UIView {
         imageViewBackground.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         imageViewBackground.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
+        addSubview(labelBetAmount)
+        labelBetAmount.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
+        labelBetAmount.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        labelBetAmount.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        labelBetAmount.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        
         addSubview(buttonLeave)
         buttonLeave.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
-        buttonLeave.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        buttonLeave.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        buttonLeave.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        buttonLeave.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        buttonLeave.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        buttonLeave.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
 
         let gamePlayStack = UIStackView(arrangedSubviews: [viewdelearDeck,viewGameActions,viewplayerDeck])
         gamePlayStack.translatesAutoresizingMaskIntoConstraints = false
         gamePlayStack.alignment = .fill
         gamePlayStack.axis = .vertical
-        gamePlayStack.distribution = .fillEqually
+        gamePlayStack.distribution = .fill
         
         
         addSubview(gamePlayStack)
         gamePlayStack.topAnchor.constraint(equalTo: buttonLeave.bottomAnchor,constant: 10).isActive = true
-        gamePlayStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20).isActive = true
+        gamePlayStack.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 10).isActive = true
         gamePlayStack.bottomAnchor.constraint(equalTo:self.safeAreaLayoutGuide.bottomAnchor,constant: -50).isActive = true
-        gamePlayStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+        gamePlayStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
 
-       // addSubview(viewdelearDeck)
-//        viewdelearDeck.topAnchor.constraint(equalTo: buttonLeave.bottomAnchor,constant: 10).isActive = true
-//        viewdelearDeck.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20).isActive = true
         viewdelearDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
-//        viewdelearDeck.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
-
-        
-        
-//        addSubview(viewplayerDeck)
-//        viewplayerDeck.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor,constant: -10).isActive = true
-//        viewplayerDeck.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20).isActive = true
         viewplayerDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
-//        viewplayerDeck.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
 
+        
+        addSubview(labelBankAmount)
+        labelBankAmount.topAnchor.constraint(equalTo: gamePlayStack.bottomAnchor,constant: 10).isActive = true
+        labelBankAmount.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        labelBankAmount.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        labelBankAmount.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         
     }
 

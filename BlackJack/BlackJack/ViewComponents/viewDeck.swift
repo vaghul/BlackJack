@@ -73,16 +73,16 @@ class viewDeck: UIView {
         viewCollection.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         viewCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         viewCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        
+        viewCollection.contentInsetAdjustmentBehavior = .never
     }
     
-    func setViewElements(playervalue:Player) {
+    func setViewElements(playervalue:Player?) {
         playerHand = playervalue
-        labelTitle.text = playervalue.name
-        labelPointValue.text = playervalue.getHandValue()
+        labelTitle.text = playervalue?.name
+        labelPointValue.text = playervalue?.getHandValue()
         viewCollection.reloadData()
     }
- 
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
