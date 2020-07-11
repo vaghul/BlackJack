@@ -28,14 +28,13 @@ class GameView: UIView {
        view.translatesAutoresizingMaskIntoConstraints = false
         view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
        view.textColor = .white
-        view.text = "BET: $500"
        view.textAlignment = .left
        return view
     }()
     
     let buttonLeave:ButtonGame = {
         let view = ButtonGame()
-        view.setTitle("Quit", for: .normal)
+        view.setTitle("Leave", for: .normal)
         view.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return view
     }()
@@ -61,10 +60,17 @@ class GameView: UIView {
        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
        view.textColor = .white
        view.textAlignment = .left
-        view.text = "BANK: $500"
        return view
     }()
        
+    func setGameInfo(info:GamePlayInfo) {
+        if let bet = info.betValue {
+            labelBetAmount.text = "BET : \(bet)"
+        }
+        if let bank = info.bankvalue {
+            labelBankAmount.text = "BET : \(bank)"
+        }
+    }
     override init(frame: CGRect) {
           super.init(frame: frame)
           backgroundColor = .white

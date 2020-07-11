@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     var dealer: Dealer! { return self.players?[0] as? Dealer }
     var istoastPresenting = false
     var isGamePlaying = false
+    var shouldResume = false
+    var gameInfo:GamePlayInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +31,28 @@ class GameViewController: UIViewController {
         deck = DeckOfCards()
         deck?.delegate = self
         viewComponent.viewGameActions.delegate = self
-        
+        if shouldResume {
+            let storedData = GameHelper.shared.retriveGameState()
+            if let cards = storedData.deck{
+                deck?.deckOfCards = cards
+            }
+            if let arrayPlayers = storedData.player {
+                players = arrayPlayers
+                viewComponent.viewdelearDeck.setViewElements(playervalue: players![0])
+                viewComponent.viewplayerDeck.setViewElements(playervalue: players![1])
+                
+                if players![1].isBlackJack() {
+                    showAlert(message: "BlackJacked !!")
+                }
+
+            }
+            if let info = storedData.game {
+                viewComponent.setGameInfo(info: info)
+            }
+            isGamePlaying = true
+        }
         viewComponent.viewGameActions.setActionValue(isnewGame: !isGamePlaying)
+
     }
     
     func startGame() {
@@ -47,10 +69,15 @@ class GameViewController: UIViewController {
         if players![1].isBlackJack() {
             showAlert(message: "BlackJacked !!")
         }
+
+        if let info = gameInfo {
+            viewComponent.setGameInfo(info: info)
+        }
     }
     func endGame() {
         self.isGamePlaying = false
         self.viewComponent.viewGameActions.setActionValue(isnewGame: !self.isGamePlaying)
+        self.players = nil
         viewComponent.viewdelearDeck.setViewElements(playervalue: nil)
         viewComponent.viewplayerDeck.setViewElements(playervalue: nil)
 
@@ -105,6 +132,9 @@ class GameViewController: UIViewController {
 
 extension GameViewController : GameViewDelegate , ViewActionsDelegate ,DeckOfCardsDelegate {
     func onClickLeave() {
+        if let arrayplayers = players,let cards = deck?.deckOfCards, let game = gameInfo {
+            GameHelper.shared.saveGameState(players: arrayplayers, deck: cards,game: game)
+        }
         self.navigationController?.popViewController(animated: false)
     }
     
@@ -117,6 +147,7 @@ extension GameViewController : GameViewDelegate , ViewActionsDelegate ,DeckOfCar
             viewComponent.viewdelearDeck.setViewElements(playervalue: players![0])
             showAlert(message: dealer.scoreCompare(with: players![1]))
         }else{
+            gameInfo = GamePlayInfo(betValue: 500, bankvalue: 500)
             startGame()
         }
     }

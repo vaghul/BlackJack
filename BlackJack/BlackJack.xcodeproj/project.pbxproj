@@ -25,6 +25,8 @@
 		C1AE439624B8FF7F00F5832B /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439524B8FF7F00F5832B /* CardCollectionViewCell.swift */; };
 		C1AE439824B90DDD00F5832B /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439724B90DDD00F5832B /* ViewActions.swift */; };
 		C1AE439B24B967F000F5832B /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439A24B967F000F5832B /* GameHelper.swift */; };
+		C1AE439E24BA45D500F5832B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439D24BA45D500F5832B /* SettingsViewController.swift */; };
+		C1AE43A024BA45E600F5832B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439F24BA45E600F5832B /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		C1AE439524B8FF7F00F5832B /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		C1AE439724B90DDD00F5832B /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		C1AE439A24B967F000F5832B /* GameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		C1AE439D24BA45D500F5832B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C1AE439F24BA45E600F5832B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 				C1AE437F24B80F2D00F5832B /* extension */,
 				C1AE437724B7D46200F5832B /* Home */,
 				C1AE438524B8145000F5832B /* Game */,
+				C1AE439C24BA45A900F5832B /* Settings */,
 				C1AE436324B7CB4400F5832B /* AppDelegate.swift */,
 				C1AE436C24B7CB4500F5832B /* Assets.xcassets */,
 				C1AE436E24B7CB4500F5832B /* LaunchScreen.storyboard */,
@@ -149,6 +154,15 @@
 				C1AE439A24B967F000F5832B /* GameHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		C1AE439C24BA45A900F5832B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C1AE439D24BA45D500F5832B /* SettingsViewController.swift */,
+				C1AE439F24BA45E600F5832B /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +238,7 @@
 				C1AE439224B8FB0700F5832B /* DeckOfCards.swift in Sources */,
 				C1AE438724B8148200F5832B /* GameViewController.swift in Sources */,
 				C1AE436424B7CB4400F5832B /* AppDelegate.swift in Sources */,
+				C1AE43A024BA45E600F5832B /* SettingsView.swift in Sources */,
 				C1AE437E24B7D4FF00F5832B /* HomeView.swift in Sources */,
 				C1AE439624B8FF7F00F5832B /* CardCollectionViewCell.swift in Sources */,
 				C1AE439B24B967F000F5832B /* GameHelper.swift in Sources */,
@@ -233,6 +248,7 @@
 				C1AE438D24B818C300F5832B /* viewDeck.swift in Sources */,
 				C1AE437C24B7D4BF00F5832B /* HomeModel.swift in Sources */,
 				C1AE439824B90DDD00F5832B /* ViewActions.swift in Sources */,
+				C1AE439E24BA45D500F5832B /* SettingsViewController.swift in Sources */,
 				C1AE438924B8149400F5832B /* GameModel.swift in Sources */,
 				C1AE438124B80F4200F5832B /* UIColor+.swift in Sources */,
 				C1AE438424B811FF00F5832B /* ButtonGame.swift in Sources */,

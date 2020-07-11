@@ -121,3 +121,10 @@ class Dealer : Player {
     }
     
 }
+
+struct GamePlayInfo:Codable {
+    
+    var betValue:Int?
+    var bankvalue:Int?
+
+}
