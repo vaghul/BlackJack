@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    var viewComponent: HomeView! { return self.view as? HomeView }
+    var viewComponent: HomeView? { return self.view as? HomeView }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,25 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         // Do any additional setup after loading the view.
         self.view = HomeView(frame: self.view.frame)
-        viewComponent.delegate = self
+        viewComponent?.delegate = self
+        
+        setGameMenu()
+        
+    }
+    
+    func setGameMenu() {
+        if GameHelper.shared.isGameAvailable {
+            viewComponent?.buttonResume.isHidden = false
+        }else{
+            viewComponent?.buttonResume.isHidden = true
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if viewComponent != nil {
+            setGameMenu()
+        }
     }
 
     /*

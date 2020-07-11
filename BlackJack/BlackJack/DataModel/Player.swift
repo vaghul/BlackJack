@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Player {
+class Player : Codable {
     
     var deckOfCards: [Card]?
     var name:String?
@@ -102,7 +102,6 @@ class Player {
 class Dealer : Player {
     
     func canhit() -> Bool {
-        print(totalPossibility)
         return totalPossibility.min()! < 17
     }
     func unHideCard() {

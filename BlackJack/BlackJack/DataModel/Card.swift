@@ -9,7 +9,7 @@
 import Foundation
 
 /// Defines the data structure for Card
-struct Card {
+struct Card :Codable {
     var rank: Rank
     var suit: Suit
     var ishidden:Bool
@@ -33,7 +33,8 @@ struct Card {
     
 }
 
-enum Suit {
+enum Suit: String,Codable {
+    
     case Spades, Hearts, Diamonds, Clubs
     
     static let allValues = [Spades, Hearts, Diamonds, Clubs]
@@ -52,7 +53,7 @@ enum Suit {
     }
 }
 
-enum Rank: Int {
+enum Rank: Int,Codable {
     case Ace = 1
     case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
     case Jack, Queen, King
