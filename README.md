@@ -38,7 +38,7 @@ contains resuable font and color configuration
 
 
 # Tech Stack
-The Application is built on **Swift 5.0** with **Coded Design** implementation. The application does not consume any third-party library
+The Application is built on **Swift 5.0** with **Coded Design (Constraints)** implementation. The application does not consume any third-party library
 
 # Contribution
 All the supporting files and architecture was hand designed , tested and improvised soley by [Vaghula Krishnan](https://github.com/vaghul)
