@@ -10,6 +10,7 @@ import UIKit
 
 protocol GameViewDelegate:class {
     func onClickLeave()
+    func onClickInteraction(index:Int)
 }
 
 class GameView: UIView {
@@ -26,7 +27,7 @@ class GameView: UIView {
     let labelBetAmount: UILabel = {
        let view = UILabel()
        view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        view.font = .mediumAppInfo
        view.textColor = .white
        view.textAlignment = .left
        return view
@@ -34,12 +35,12 @@ class GameView: UIView {
     
     let buttonLeave:ButtonGame = {
         let view = ButtonGame()
-        view.setTitle("Leave", for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        view.setTitle(Constants.shared.PlaceholderTitleLeave, for: .normal)
+        view.titleLabel?.font = .regularAppDisclaimer
         return view
     }()
     
-    let viewdelearDeck:viewDeck = {
+    let braindelearDeck:viewDeck = {
        let view = viewDeck()
         return view
     }()
@@ -49,7 +50,7 @@ class GameView: UIView {
         return view
     }()
     
-    let viewplayerDeck:viewDeck = {
+    let brainplayerDeck:viewDeck = {
         let view = viewDeck()
         return view
     }()
@@ -62,15 +63,27 @@ class GameView: UIView {
        view.textAlignment = .left
        return view
     }()
+   
+    let viewBet:viewBets = {
+        let view = viewBets()
+        view.isHidden = true
+        return view
+    }()
        
     func setGameInfo(info:GamePlayInfo) {
         if let bet = info.betValue {
             labelBetAmount.text = "BET : \(bet)"
         }
         if let bank = info.bankvalue {
-            labelBankAmount.text = "BET : \(bank)"
+            labelBankAmount.text = "BANK : \(bank)"
         }
     }
+    
+    func resetGameInfo() {
+        labelBetAmount.text = nil
+        labelBankAmount.text = nil
+    }
+
     override init(frame: CGRect) {
           super.init(frame: frame)
           backgroundColor = .white
@@ -106,7 +119,7 @@ class GameView: UIView {
         buttonLeave.heightAnchor.constraint(equalToConstant: 30).isActive = true
         buttonLeave.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
 
-        let gamePlayStack = UIStackView(arrangedSubviews: [viewdelearDeck,viewGameActions,viewplayerDeck])
+        let gamePlayStack = UIStackView(arrangedSubviews: [braindelearDeck,viewGameActions,brainplayerDeck])
         gamePlayStack.translatesAutoresizingMaskIntoConstraints = false
         gamePlayStack.alignment = .fill
         gamePlayStack.axis = .vertical
@@ -119,8 +132,8 @@ class GameView: UIView {
         gamePlayStack.bottomAnchor.constraint(equalTo:self.safeAreaLayoutGuide.bottomAnchor,constant: -50).isActive = true
         gamePlayStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
 
-        viewdelearDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
-        viewplayerDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        braindelearDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        brainplayerDeck.heightAnchor.constraint(equalToConstant: 180).isActive = true
 
         
         addSubview(labelBankAmount)
@@ -129,6 +142,13 @@ class GameView: UIView {
         labelBankAmount.heightAnchor.constraint(equalToConstant: 40).isActive = true
         labelBankAmount.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         
+        
+        addSubview(viewBet)
+        viewBet.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        viewBet.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        viewBet.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        viewBet.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
     }
 
 }

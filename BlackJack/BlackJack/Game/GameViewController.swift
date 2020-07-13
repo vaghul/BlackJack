@@ -8,16 +8,12 @@
 
 import UIKit
 
+typealias GameScreenState = (istoastPresenting:Bool,isGamePlaying:Bool,shouldResume:Bool)
 class GameViewController: UIViewController {
 
     var viewComponent: GameView! { return self.view as? GameView }
     var deck:DeckOfCards?
-    let maxPlayer = 2 // inc dealer
-    var players:[Player]?
-    var dealer: Dealer! { return self.players?[0] as? Dealer }
-    var istoastPresenting = false
-    var isGamePlaying = false
-    var shouldResume = false
+    var screenState:GameScreenState = GameScreenState(istoastPresenting:false,isGamePlaying:false,shouldResume:false)
     var gameInfo:GamePlayInfo?
     
     override func viewDidLoad() {
@@ -31,43 +27,57 @@ class GameViewController: UIViewController {
         deck = DeckOfCards()
         deck?.delegate = self
         viewComponent.viewGameActions.delegate = self
-        if shouldResume {
+        viewComponent.viewBet.delegate = self
+        if screenState.shouldResume {
             let storedData = GameHelper.shared.retriveGameState()
             if let cards = storedData.deck{
                 deck?.deckOfCards = cards
             }
             if let arrayPlayers = storedData.player {
-                players = arrayPlayers
-                viewComponent.viewdelearDeck.setViewElements(playervalue: players![0])
-                viewComponent.viewplayerDeck.setViewElements(playervalue: players![1])
+                //players = arrayPlayers
+                viewComponent.braindelearDeck.setPlayer(object: arrayPlayers[0])
+                viewComponent.brainplayerDeck.setPlayer(object: arrayPlayers[1])
                 
-                if players![1].isBlackJack() {
+                if viewComponent.brainplayerDeck.isPlayerBlackJacked() {
                     showAlert(message: "BlackJacked !!")
+                    if let bet = storedData.game?.betValue, let bank = storedData.game?.bankvalue {
+                        GameHelper.shared.saveGameSetting(minAmount: nil, bank: bank + (bet * 2))
+                    }
                 }
 
             }
             if let info = storedData.game {
+                gameInfo = info
                 viewComponent.setGameInfo(info: info)
             }
-            isGamePlaying = true
+            screenState.isGamePlaying = true
         }
-        viewComponent.viewGameActions.setActionValue(isnewGame: !isGamePlaying)
+        viewComponent.viewGameActions.setActionValue(isnewGame: !screenState.isGamePlaying)
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if let dealer = viewComponent.braindelearDeck.getDealerObj(),
+            let player = viewComponent.brainplayerDeck.getPlayerObj(),
+            let cards = deck?.deckOfCards,
+            let game = gameInfo {
+                GameHelper.shared.saveGameState(players: [dealer,player], deck: cards,game: game)
+        }
+    }
+    
     func startGame() {
-        isGamePlaying = true
-        self.viewComponent.viewGameActions.setActionValue(isnewGame: !self.isGamePlaying)
+        screenState.isGamePlaying = true
+        self.viewComponent.viewGameActions.setActionValue(isnewGame: !self.screenState.isGamePlaying)
 
         deck?.shuffle()
         setPlayers()
         dealCards()
-
-        viewComponent.viewdelearDeck.setViewElements(playervalue: players![0])
-        viewComponent.viewplayerDeck.setViewElements(playervalue: players![1])
         
-        if players![1].isBlackJack() {
+        if viewComponent.brainplayerDeck.isPlayerBlackJacked() {
             showAlert(message: "BlackJacked !!")
+            if let bet = gameInfo?.betValue, let bank = gameInfo?.bankvalue {
+                GameHelper.shared.saveGameSetting(minAmount: nil, bank: bank + (bet * 2))
+            }
         }
 
         if let info = gameInfo {
@@ -75,29 +85,33 @@ class GameViewController: UIViewController {
         }
     }
     func endGame() {
-        self.isGamePlaying = false
-        self.viewComponent.viewGameActions.setActionValue(isnewGame: !self.isGamePlaying)
-        self.players = nil
-        viewComponent.viewdelearDeck.setViewElements(playervalue: nil)
-        viewComponent.viewplayerDeck.setViewElements(playervalue: nil)
+        self.screenState.isGamePlaying = false
+        self.viewComponent.viewGameActions.setActionValue(isnewGame: !self.screenState.isGamePlaying)
+//        self.players = nil
+        var defaultSettings = GameHelper.shared.getGameSetting()
+        GameHelper.shared.saveGameSetting(minAmount: nil, bank: defaultSettings.getBankBalance())
+        viewComponent.resetGameInfo()
+        viewComponent.braindelearDeck.resetPlayersHand()
+        viewComponent.brainplayerDeck.resetPlayersHand()
 
     }
     func setPlayers() {
-        players = [Dealer(name: "Dealer"),Player(name: "Player")]
+        viewComponent.braindelearDeck.setPlayer(object: Dealer(name: "Dealer"))
+        viewComponent.brainplayerDeck.setPlayer(object: Player(name: "You"))
     }
     
     func dealCards(noOfCards:Int = 2) {
         for i in 0..<noOfCards {
-            players![0].addCard(card: deck?.dealOneCard(ishidden: (i == 0) ? true : false ))
-            players![1].addCard(card: deck?.dealOneCard())
+            viewComponent.braindelearDeck.addCard(dealtCard: deck?.dealOneCard(ishidden: (i == 0) ? true : false ))
+            viewComponent.brainplayerDeck.addCard(dealtCard: deck?.dealOneCard())
         }
     }
     
     func showAlert(message:String,isgameEnd:Bool = true) {
         
         // the alert view
-        if istoastPresenting == false {
-            istoastPresenting = true
+        if screenState.istoastPresenting == false {
+            screenState.istoastPresenting = true
             let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
             // change to desired number of seconds (in this case 5 seconds)
@@ -105,13 +119,13 @@ class GameViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: when){
                 // your code with delay
                 alert.dismiss(animated: true, completion: nil)
-                self.istoastPresenting = false
+                self.screenState.istoastPresenting = false
                 if isgameEnd {
                     self.endGame()
                 }
             }
         }else{
-            let when = DispatchTime.now() + 2
+            let when = DispatchTime.now() + 1.2
             DispatchQueue.main.asyncAfter(deadline: when){
                 self.showAlert(message: message,isgameEnd: isgameEnd)
             }
@@ -130,42 +144,70 @@ class GameViewController: UIViewController {
 
 }
 
-extension GameViewController : GameViewDelegate , ViewActionsDelegate ,DeckOfCardsDelegate {
+extension GameViewController : GameViewDelegate , ViewActionsDelegate ,DeckOfCardsDelegate, viewBetsDelegate {
     func onClickLeave() {
-        if let arrayplayers = players,let cards = deck?.deckOfCards, let game = gameInfo {
-            GameHelper.shared.saveGameState(players: arrayplayers, deck: cards,game: game)
-        }
         self.navigationController?.popViewController(animated: false)
     }
+    func onClickInteraction(index: Int) {
+        
+    }
     
-    func onClickStand() {
-        if isGamePlaying {
-            dealer.unHideCard()
+    func onClickLeft() {
+        if screenState.isGamePlaying {
+            let dealer = self.viewComponent.braindelearDeck.getDealerObj()!
+            self.viewComponent.braindelearDeck.unHideCard()
             while dealer.canhit() {
-                dealer.addCard(card: deck?.dealOneCard())
+                self.viewComponent.braindelearDeck.addCard(dealtCard: deck?.dealOneCard())
             }
-            viewComponent.viewdelearDeck.setViewElements(playervalue: players![0])
-            showAlert(message: dealer.scoreCompare(with: players![1]))
+            //viewComponent.viewdelearDeck.setViewElements(playervalue: players![0])
+            let gameStatus = dealer.scoreCompare(with: viewComponent.brainplayerDeck.getPlayerObj()!)
+            
+            if gameStatus == .player_won || gameStatus == .pass {
+                if let bet = gameInfo?.betValue, let bank = gameInfo?.bankvalue {
+                    GameHelper.shared.saveGameSetting(minAmount: nil, bank: bank + (bet * ((gameStatus == .pass) ? 1 : 2)))
+                }
+            }
+            showAlert(message: gameStatus.rawValue)
         }else{
-            gameInfo = GamePlayInfo(betValue: 500, bankvalue: 500)
-            startGame()
+            var defaultSettings = GameHelper.shared.getGameSetting()
+            if defaultSettings.canBet() {
+                gameInfo = GamePlayInfo(betValue: defaultSettings.minBet, bankvalue: defaultSettings.getBankBalance())
+                startGame()
+            }else{
+                showAlert(message: "Insufficient Balance", isgameEnd: false)
+            }
+            
         }
     }
     
-    func onClickHit() {
-        if isGamePlaying {
-            players![1].addCard(card: deck?.dealOneCard())
-            viewComponent.viewplayerDeck.setViewElements(playervalue: players![1])
+    func onClickRight() {
+        if screenState.isGamePlaying {
+            viewComponent.brainplayerDeck.addCard(dealtCard: deck?.dealOneCard())
             
-            if players![1].isBust() {
+            if viewComponent.brainplayerDeck.isPlayerBust() {
                 showAlert(message: "Bust")
             }
         }else{
-            
+            viewComponent.viewBet.isHidden = false
         }
     }
     
     func didShuffle() {
         showAlert(message: "Shuffling Card",isgameEnd: false)
+    }
+    
+    func onClickClose() {
+        viewComponent.viewBet.isHidden = true
+    }
+    func onClickChip(value: Int) {
+        viewComponent.viewBet.isHidden = true
+        let defaultSettings = GameHelper.shared.getGameSetting()
+        if defaultSettings.bankBalance - value >= 0 {
+            gameInfo = GamePlayInfo(betValue: value, bankvalue: defaultSettings.bankBalance - value)
+            GameHelper.shared.saveGameSetting(minAmount: nil, bank: defaultSettings.bankBalance - value)
+            startGame()
+        }else{
+            showAlert(message: "Insufficient Balance", isgameEnd: false)
+        }
     }
 }

@@ -55,7 +55,7 @@ extension HomeViewController:HomeViewDelegate {
     func onClickGameMenu(index: Int) {
         if index == 0 {
             let gameVc = GameViewController()
-            gameVc.shouldResume = true
+            gameVc.screenState.shouldResume = true
             self.navigationController?.pushViewController(gameVc, animated: false)
         }else if index == 1{
             let gameVc = GameViewController()

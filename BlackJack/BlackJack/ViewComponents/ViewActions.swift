@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ViewActionsDelegate:class {
-    func onClickStand()
-    func onClickHit()
+    func onClickLeft()
+    func onClickRight()
 }
 
 
@@ -40,11 +40,11 @@ class ViewActions:UIView {
     
     func setActionValue(isnewGame:Bool) {
         if isnewGame {
-            buttonStand.setTitle("Play Min Bet", for: .normal)
-            buttonHit.setTitle("Play Custom Bet", for: .normal)
+            buttonStand.setTitle(Constants.shared.PlaceholderTitleMinBet, for: .normal)
+            buttonHit.setTitle(Constants.shared.PlaceholderTitleCustomBet, for: .normal)
         }else{
-            buttonStand.setTitle("Stand", for: .normal)
-            buttonHit.setTitle("Hit", for: .normal)
+            buttonStand.setTitle(Constants.shared.PlaceholderTitleStand, for: .normal)
+            buttonHit.setTitle(Constants.shared.PlaceholderTitleHit, for: .normal)
         }
     }
     
@@ -71,9 +71,9 @@ class ViewActions:UIView {
     
     @objc func  onClickAction(_ sender:UIButton) {
         if sender.tag == 0 {
-            delegate?.onClickStand()
+            delegate?.onClickLeft()
         }else if sender.tag == 1{
-            delegate?.onClickHit()
+            delegate?.onClickRight()
         }
     }
     

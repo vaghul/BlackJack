@@ -24,7 +24,7 @@ class ButtonGame: UIButton {
         self.layer.borderColor = UIColor.borderGreen.cgColor
         self.setTitleColor(.white, for:  .normal)
         self.setTitleColor(.buttonRed, for: .highlighted)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        self.titleLabel?.font = .semiBoldAction
 
     }
     

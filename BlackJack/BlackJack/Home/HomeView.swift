@@ -33,8 +33,8 @@ class HomeView: UIView {
     let labelTitle:UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.systemFont(ofSize: 40, weight: .heavy)
-        view.text = "Black Jack"
+        view.font = .heavyAppTitle
+        view.text = Constants.shared.PlaceholderTitleApp
         view.textColor = .black
         view.textAlignment = .center
         return view
@@ -43,21 +43,21 @@ class HomeView: UIView {
     let buttonResume:ButtonGame = {
         let view = ButtonGame()
         view.tag = 0
-        view.setTitle("Resume Game", for: .normal)
+        view.setTitle(Constants.shared.PlaceholderTitleResume, for: .normal)
         return view
     }()
     
     let buttonNewGame:ButtonGame = {
         let view = ButtonGame()
         view.tag = 1
-        view.setTitle("New Game", for: .normal)
+        view.setTitle(Constants.shared.PlaceholderTitleNewGame, for: .normal)
         return view
     }()
     
     let buttonSetting:ButtonGame = {
         let view = ButtonGame()
         view.tag = 2
-        view.setTitle("Setting", for: .normal)
+        view.setTitle(Constants.shared.PlaceholderTitleSettings, for: .normal)
         return view
     }()
     

@@ -109,22 +109,15 @@ class Dealer : Player {
         addCardPossibility(value: (hiddenCardValue >= 11) ? 10 : hiddenCardValue)
         hiddenCardValue = 0
     }
-    func scoreCompare(with opponent:Player) -> String {
+    func scoreCompare(with opponent:Player) -> GameState {
         
         if self.totalPossibility.max()! > opponent.totalPossibility.max()! && !self.isBust(){
-            return "Dealer Won"
+            return .dealer_won
         }else if self.totalPossibility.contains(opponent.totalPossibility.max()!){
-            return "Pass"
+            return .pass
         }else {
-            return "You Won"
+            return .player_won
         }
     }
     
-}
-
-struct GamePlayInfo:Codable {
-    
-    var betValue:Int?
-    var bankvalue:Int?
-
 }

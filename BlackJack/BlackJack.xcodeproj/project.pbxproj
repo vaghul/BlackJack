@@ -27,6 +27,11 @@
 		C1AE439B24B967F000F5832B /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439A24B967F000F5832B /* GameHelper.swift */; };
 		C1AE439E24BA45D500F5832B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439D24BA45D500F5832B /* SettingsViewController.swift */; };
 		C1AE43A024BA45E600F5832B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE439F24BA45E600F5832B /* SettingsView.swift */; };
+		C1AE43A224BB5A2D00F5832B /* viewBets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE43A124BB5A2D00F5832B /* viewBets.swift */; };
+		C1AE43A424BB5C7400F5832B /* ChipsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE43A324BB5C7400F5832B /* ChipsCollectionViewCell.swift */; };
+		C1AE43A624BBDB4900F5832B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE43A524BBDB4900F5832B /* Settings.swift */; };
+		C1AE43A924BBDBBA00F5832B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE43A824BBDBBA00F5832B /* Constants.swift */; };
+		C1AE43AB24BBDEBA00F5832B /* UIFonts+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AE43AA24BBDEBA00F5832B /* UIFonts+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,11 @@
 		C1AE439A24B967F000F5832B /* GameHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
 		C1AE439D24BA45D500F5832B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C1AE439F24BA45E600F5832B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C1AE43A124BB5A2D00F5832B /* viewBets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewBets.swift; sourceTree = "<group>"; };
+		C1AE43A324BB5C7400F5832B /* ChipsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsCollectionViewCell.swift; sourceTree = "<group>"; };
+		C1AE43A524BBDB4900F5832B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C1AE43A824BBDBBA00F5832B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C1AE43AA24BBDEBA00F5832B /* UIFonts+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFonts+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,7 @@
 		C1AE436224B7CB4400F5832B /* BlackJack */ = {
 			isa = PBXGroup;
 			children = (
+				C1AE43A724BBDBA800F5832B /* Constants */,
 				C1AE439924B967D900F5832B /* Helper */,
 				C1AE438E24B8FA8E00F5832B /* DataModel */,
 				C1AE438224B811E600F5832B /* ViewComponents */,
@@ -113,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				C1AE438024B80F4200F5832B /* UIColor+.swift */,
+				C1AE43AA24BBDEBA00F5832B /* UIFonts+.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -124,6 +136,8 @@
 				C1AE438C24B818C300F5832B /* viewDeck.swift */,
 				C1AE439524B8FF7F00F5832B /* CardCollectionViewCell.swift */,
 				C1AE439724B90DDD00F5832B /* ViewActions.swift */,
+				C1AE43A124BB5A2D00F5832B /* viewBets.swift */,
+				C1AE43A324BB5C7400F5832B /* ChipsCollectionViewCell.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -144,6 +158,7 @@
 				C1AE438F24B8FAAF00F5832B /* Card.swift */,
 				C1AE439124B8FB0700F5832B /* DeckOfCards.swift */,
 				C1AE439324B8FB9900F5832B /* Player.swift */,
+				C1AE43A524BBDB4900F5832B /* Settings.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -163,6 +178,14 @@
 				C1AE439F24BA45E600F5832B /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		C1AE43A724BBDBA800F5832B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C1AE43A824BBDBBA00F5832B /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +259,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1AE439224B8FB0700F5832B /* DeckOfCards.swift in Sources */,
+				C1AE43A924BBDBBA00F5832B /* Constants.swift in Sources */,
 				C1AE438724B8148200F5832B /* GameViewController.swift in Sources */,
+				C1AE43AB24BBDEBA00F5832B /* UIFonts+.swift in Sources */,
 				C1AE436424B7CB4400F5832B /* AppDelegate.swift in Sources */,
 				C1AE43A024BA45E600F5832B /* SettingsView.swift in Sources */,
 				C1AE437E24B7D4FF00F5832B /* HomeView.swift in Sources */,
@@ -249,10 +274,13 @@
 				C1AE437C24B7D4BF00F5832B /* HomeModel.swift in Sources */,
 				C1AE439824B90DDD00F5832B /* ViewActions.swift in Sources */,
 				C1AE439E24BA45D500F5832B /* SettingsViewController.swift in Sources */,
+				C1AE43A424BB5C7400F5832B /* ChipsCollectionViewCell.swift in Sources */,
 				C1AE438924B8149400F5832B /* GameModel.swift in Sources */,
 				C1AE438124B80F4200F5832B /* UIColor+.swift in Sources */,
 				C1AE438424B811FF00F5832B /* ButtonGame.swift in Sources */,
+				C1AE43A624BBDB4900F5832B /* Settings.swift in Sources */,
 				C1AE439024B8FAAF00F5832B /* Card.swift in Sources */,
+				C1AE43A224BB5A2D00F5832B /* viewBets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

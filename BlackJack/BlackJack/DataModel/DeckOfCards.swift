@@ -64,10 +64,4 @@ class DeckOfCards {
     deckOfCards = shuffled
   }
   
-  /// Pops the last card in deck until no card is left
-  func dealAllCards() {
-    while deckOfCards.count > 0 {
-      print("Dealing \(dealOneCard().simpleDescription())")
-    }
-  }
 }

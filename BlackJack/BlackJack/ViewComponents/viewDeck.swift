@@ -10,12 +10,12 @@ import UIKit
 
 class viewDeck: UIView {
 
-    var playerHand:Player?
+    private var playerHand:Player?
     
     let labelTitle:UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        view.font = .semiBoldTitle
         view.textColor = .white
         view.textAlignment = .left
         return view
@@ -24,7 +24,7 @@ class viewDeck: UIView {
     let labelPointValue:UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        view.font = .semiBoldTitle
         view.textColor = .white
         view.textAlignment = .right
         return view
@@ -35,7 +35,7 @@ class viewDeck: UIView {
         layout.minimumLineSpacing = 0
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
-        view.register(CardCollectionViewCell.self, forCellWithReuseIdentifier: "CARD")
+        view.register(CardCollectionViewCell.self, forCellWithReuseIdentifier: Constants.shared.CellReuseCard)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.showsHorizontalScrollIndicator = false
         return view
@@ -75,12 +75,60 @@ class viewDeck: UIView {
         viewCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         viewCollection.contentInsetAdjustmentBehavior = .never
     }
+        
+    func setPlayer(object:Player) {
+        playerHand = object
+        labelTitle.text = playerHand?.name
+        if playerHand?.deckOfCards != nil {
+            viewCollection.reloadData()
+        }
+    }
     
-    func setViewElements(playervalue:Player?) {
-        playerHand = playervalue
-        labelTitle.text = playervalue?.name
-        labelPointValue.text = playervalue?.getHandValue()
+    func resetPlayersHand() {
+        playerHand = nil
+        labelTitle.text = nil
+        labelPointValue.text = nil
         viewCollection.reloadData()
+    }
+    
+    func addCard(dealtCard:Card?) {
+        if let cardValue = dealtCard {
+            playerHand?.addCard(card: cardValue)
+            if let count = playerHand?.deckOfCards?.count {
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.viewCollection.insertItems(at: [IndexPath(item: count - 1, section: 0)])
+                }, completion: nil)
+                
+                labelPointValue.text = playerHand!.getHandValue()
+            }
+        }
+    }
+    
+    func isPlayerBlackJacked() -> Bool {
+        guard playerHand != nil else { return  false}
+        
+        return playerHand!.isBlackJack()
+    }
+
+    func getPlayerObj() -> Player? {
+        return playerHand
+    }
+    
+    func getDealerObj() -> Dealer? {
+        return playerHand as? Dealer
+    }
+    
+    func isPlayerBust() -> Bool {
+        guard playerHand != nil else { return  false}
+        
+        return playerHand!.isBust()
+
+    }
+    func unHideCard() {
+        if let count = playerHand?.deckOfCards?.count, count >= 1, let dealer = self.getDealerObj() {
+            dealer.unHideCard()
+            viewCollection.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -95,7 +143,7 @@ extension viewDeck : UICollectionViewDataSource, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CARD", for: indexPath) as! CardCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.shared.CellReuseCard, for: indexPath) as! CardCollectionViewCell
         if let cardvalue = playerHand?.deckOfCards?[indexPath.item] {
             cell.setCardImage(card: cardvalue)
         }
@@ -111,12 +159,5 @@ extension viewDeck : UICollectionViewDataSource, UICollectionViewDelegate, UICol
         return .zero
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        
-    }
-    
-   
     
 }
