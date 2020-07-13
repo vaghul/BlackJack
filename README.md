@@ -41,4 +41,4 @@ contains resuable font and color configuration
 The Application is built on **Swift 5.0** with **Coded Design (Constraints)** implementation. The application does not consume any third-party library
 
 # Contribution
-All the supporting files and architecture was hand designed , tested and improvised soley by [Vaghula Krishnan](https://github.com/vaghul)
+All the supporting files and architecture was hand designed , tested and improvised by [Vaghula Krishnan](https://github.com/vaghul)
